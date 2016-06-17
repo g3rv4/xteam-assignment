@@ -2,6 +2,9 @@
 <html>
     <head>
         <title>Discount Ascii Warehouse</title>
+        <base href="/">
+        <script data-main="/js/main.min" src="/js/libs/requirejs/require.js"></script>
+        <link href="/css/main.min.css" rel="stylesheet"/>
     </head>
     <body>
         <header>
@@ -13,7 +16,7 @@
         </header>
 
         <section class="products">
-            ... products go here ...
+            <ui-view></ui-view>
         </section>
     </body>
 </html>

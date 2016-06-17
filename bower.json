@@ -1,0 +1,30 @@
+{
+  "name": "discount-ascii-warehouse",
+  "description": "For all your ascii needs.",
+  "main": "index.js",
+  "authors": [
+    "Gervasio Marchand <gmc@gmc.uy>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "^1.3.3",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.3",
+    "lodash": "^4.13.1",
+    "angular-moment": "^0.10.3",
+    "angular-animate": "1.4.12",
+    "angular-resource": "1.4.12",
+    "requirejs": "^2.2.0",
+    "angular-ui-router": "^0.3.1"
+  }
+}
