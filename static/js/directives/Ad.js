@@ -6,9 +6,16 @@
                 return {
                     restrict: 'E',
                     replace: true,
-                    template: '<img class="ad" src="/ad/?r={{ id }}" />',
+                    template: '<img ng-if="id !== null" class="ad" src="/ad/?r={{ id }}" style="{{ style }}" />',
                     link: function (scope, element, attr) {
-                        scope.id = AdIdService.get(attr.location);
+                        attr.$observe('location', function(value){
+                            if(value) {
+                                scope.id = AdIdService.get(value);
+                            }
+                        });
+
+                        scope.id = null;
+                        scope.style = attr.useStyle;
                     }
                 }
             };

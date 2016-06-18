@@ -6,14 +6,17 @@
     </div>
 </div>
 <div class="container-fluid" style="height: 700px;" ui-scroll-viewport>
-    <div ui-scroll="row in ctrl.rows">
-        <div class="row">
-            <div class="col-md-5">{{ row }}</div>
+    <div ui-scroll="row in ctrl.rows" buffer-size="20">
+        <div class="row" ng-if="row.type == 'element'">
+            <div class="col-md-5">Getting element {{ row.element }}</div>
             <div class="col-md-4">{{ $index }}</div>
             <div class="col-md-3">Yay!</div>
         </div>
-        <div class="row" ng-if="$index % 20 == 0" style="height: 200px;">
-            <div class="col-md-12 text-center"><ad location="position{{$index}}"></ad></div>
+        <div class="row" ng-if="row.type == 'empty'">
+            <div class="col-md-12">&nbsp;</div>
+        </div>
+        <div class="row" ng-if="row.type == 'ad'">
+            <div class="col-md-12" style="height: 20px; overflow: visible"><ad location="{{$index}}" use-style="position: absolute; bottom: 0"></ad></div>
         </div>
     </div>
 </div>
