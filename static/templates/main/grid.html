@@ -1,1 +1,19 @@
-Grid here!
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-5">Face</div>
+        <div class="col-md-4">Date</div>
+        <div class="col-md-3">Price</div>
+    </div>
+</div>
+<div class="container-fluid" style="height: 700px;" ui-scroll-viewport>
+    <div ui-scroll="row in ctrl.rows">
+        <div class="row">
+            <div class="col-md-5">{{ row }}</div>
+            <div class="col-md-4">{{ $index }}</div>
+            <div class="col-md-3">Yay!</div>
+        </div>
+        <div class="row" ng-if="$index % 20 == 0" style="height: 200px;">
+            <div class="col-md-12 text-center"><ad location="position{{$index}}"></ad></div>
+        </div>
+    </div>
+</div>

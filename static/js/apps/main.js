@@ -1,10 +1,12 @@
 (function(define) {
     define(
-        ['angular', 'modules/MainModule'],
-        function (ng, MainModule) {
+        ['angular', 'modules/MainModule', 'directives/Ad', 'services/AdIdService'],
+        function (ng, MainModule, Ad, AdIdService) {
             var app, appName = 'Demo';
 
             app = ng.module(appName, [MainModule])
+                .factory('AdIdService', AdIdService)
+                .directive('ad', Ad)
                 .config(['$locationProvider', function($locationProvider){
                     $locationProvider.html5Mode(true);
                 }]);

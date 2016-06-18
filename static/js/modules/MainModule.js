@@ -6,12 +6,13 @@
             'services/ModelService',
             'routers/MainRouter',
             'ng-ui-router',
-            'ng-resource'
+            'ng-resource',
+            'ui-scroll'
         ],
         function (ng, MainCtrl, ModelService, MainRouter) {
             var moduleName = 'Demo.MainModule';
 
-            ng.module(moduleName, ['ui.router', 'ngResource'])
+            ng.module(moduleName, ['ui.router', 'ngResource', 'ui.scroll.jqlite', 'ui.scroll'])
                 .controller('MainCtrl', MainCtrl)
                 .factory('ModelService', ModelService)
                 .config(MainRouter);

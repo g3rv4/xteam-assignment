@@ -9,7 +9,9 @@ requirejs.config({
         "ng-ui-router": "libs/angular-ui-router/release/angular-ui-router",
         "ng-bootstrap": "libs/angular-bootstrap/ui-bootstrap-tpls",
         "moment": "libs/moment/moment",
-        "ng-moment": 'libs/angular-moment/angular-moment'
+        "ng-moment": 'libs/angular-moment/angular-moment',
+        "ui-scroll-jqlite": 'libs/ui-scroll/dist/ui-scroll-jqlite',
+        "ui-scroll": 'libs/ui-scroll/dist/ui-scroll'
     },
     "shim": {
         "angular": {
@@ -22,6 +24,8 @@ requirejs.config({
         "moment": {
             exports: 'moment'
         },
-        "ng-moment": ['angular', 'moment']
+        "ng-moment": ['angular', 'moment'],
+        "ui-scroll-jqlite": ['angular'],
+        "ui-scroll": ['angular', 'ui-scroll-jqlite']
     }
 });
