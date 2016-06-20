@@ -1,7 +1,7 @@
 (function (define) {
     define(
-        [],
-        function () {
+        ['moment'],
+        function (moment) {
             var MainController = function (AppConfig, RowTypeService, ModelService, $timeout) {
                 var _this = this;
                 var Ascii = ModelService.Ascii;
@@ -35,6 +35,7 @@
                             if (row.type == 'element') {
                                 row.element = _this.elements.next.pop();
                                 row.size = row.element.size + 20;
+                                row.show_relative = moment().diff(moment(row.element.date), 'days') <= 7;
                             } else {
                                 row.size = 200;
                             }

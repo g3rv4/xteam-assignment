@@ -8,12 +8,13 @@
             'routers/MainRouter',
             'ng-ui-router',
             'ng-resource',
-            'ng-vs-repeat'
+            'ng-vs-repeat',
+            'ng-moment'
         ],
         function (ng, MainCtrl, ModelService, RowTypeService, MainRouter) {
             var moduleName = 'Demo.MainModule';
 
-            ng.module(moduleName, ['ui.router', 'ngResource', 'vs-repeat'])
+            ng.module(moduleName, ['ui.router', 'ngResource', 'vs-repeat', 'angularMoment'])
                 .controller('MainCtrl', MainCtrl)
                 .factory('ModelService', ModelService)
                 .factory('RowTypeService', RowTypeService)

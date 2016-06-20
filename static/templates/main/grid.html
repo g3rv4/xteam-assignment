@@ -14,10 +14,11 @@
             {{ item.element.face }}
         </div>
         <div ng-if="item.type == 'element'" class="col-md-4">
-            {{ item.element.date }}
+            <span am-time-ago="item.element.date" ng-if="item.show_relative"></span>
+            <span ng-if="!item.show_relative">{{ item.element.date | amDateFormat:'dddd, MMMM Do YYYY' }}</span>
         </div>
         <div ng-if="item.type == 'element'" class="col-md-3">
-            {{ item.element.price }}
+            {{ item.element.price / 100 | currency: '$' }}
         </div>
     </div>
 </div>
