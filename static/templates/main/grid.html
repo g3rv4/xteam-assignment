@@ -1,6 +1,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-5">Face</div>
+        <div class="col-md-1">Row</div>
+        <div class="col-md-4">ASCII</div>
         <div class="col-md-4">Date</div>
         <div class="col-md-3">Price</div>
     </div>
@@ -10,7 +11,10 @@
         <div ng-if="item.type == 'ad'" class="col-md-12 text-center">
             <ad location="{{item.location}}"></ad>
         </div>
-        <div ng-if="item.type == 'element'" class="col-md-5" style="font-size: {{ item.element.size }}px">
+        <div ng-if="item.type == 'element'" class="col-md-1">
+            {{ item.position }}
+        </div>
+        <div ng-if="item.type == 'element'" class="col-md-4" style="font-size: {{ item.element.size }}px">
             {{ item.element.face }}
         </div>
         <div ng-if="item.type == 'element'" class="col-md-4">

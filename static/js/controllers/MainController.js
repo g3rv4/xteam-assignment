@@ -31,14 +31,15 @@
                         var base_position = _this.elements.current.length;
                         var i = 0;
                         while (_this.elements.next.length) {
-                            var row = RowTypeService.getRowType(base_position + i++);
+                            var row = RowTypeService.getRowType(base_position + i);
                             if (row.type == 'element') {
                                 row.element = _this.elements.next.pop();
                                 row.size = row.element.size + 20;
-                                row.show_relative = moment().diff(moment(row.element.date), 'days') <= 7;
+                                row.show_relative = moment().diff(moment(row.element.date), 'days') < 7;
                             } else {
                                 row.size = 200;
                             }
+                            row.position = base_position + i++;
                             _this.elements.current.push(row);
                         }
                         _this.loadNextPage();
