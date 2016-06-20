@@ -1,34 +1,56 @@
 (function (define) {
     define(
-        ['lodash', 'angular'],
-        function (_, ng) {
-            var MainController = function (RowType) {
+        [],
+        function () {
+            var MainController = function (AppConfig, RowTypeService, ModelService, $timeout) {
                 var _this = this;
-                _this.used_ads = [];
+                var Ascii = ModelService.Ascii;
 
-                _this.scroll_params = {
-                    items_before_ad: 20,
-                    empty_rows_per_ad: 9
+                _this.next_page = 0;
+                _this.elements = {
+                    current: [],
+                    next: []
                 };
 
-                _this.rows = {};
-                _this.rows.get = function(index, count, success){
-                    var res = [];
-                    var start = Math.max(index, 1);
-                    for (var i = start; i < index + count; i++) {
-                        var row = RowType.getRowType(i-1);
-                        row.element = 'Showing element ' + row.position;
-                        res.push(row);
+                _this.loadNextPage = function(callback){
+                    var data = Ascii.query({
+                        page: _this.next_page,
+                        limit: AppConfig.elements_per_page
+                    }, function(){
+                        _this.elements.next = data;
+                        _this.next_page++;
+                        if(callback)
+                            callback(data);
+                    });
+                };
+
+                _this.showNextPage = function(){
+                    if(_this.elements.next.length == 0)
+                        $timeout(_this.showNextPage, 500);
+                    else {
+                        var base_position = _this.elements.current.length;
+                        var i = 0;
+                        while (_this.elements.next.length) {
+                            var row = RowTypeService.getRowType(base_position + i++);
+                            if (row.type == 'element') {
+                                row.element = _this.elements.next.pop();
+                                row.size = row.element.size + 20;
+                            } else {
+                                row.size = 200;
+                            }
+                            _this.elements.current.push(row);
+                        }
+                        _this.loadNextPage();
                     }
-                    success(res);
                 };
-                
-                _this.getNextAd = function(){
 
-                };
+                _this.loadNextPage(function () {
+                    _this.showNextPage();
+                });
+
             };
 
-            return ['RowType', MainController];
+            return ['AppConfig', 'RowTypeService', 'ModelService', '$timeout', MainController];
         }
     );
 }(define));

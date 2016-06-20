@@ -4,27 +4,24 @@
             'angular',
             'controllers/MainController',
             'services/ModelService',
-            'providers/RowTypeProvider',
+            'services/RowTypeService',
             'routers/MainRouter',
             'ng-ui-router',
             'ng-resource',
-            'ui-scroll'
+            'ng-vs-repeat'
         ],
-        function (ng, MainCtrl, ModelService, RowTypeProvider, MainRouter) {
+        function (ng, MainCtrl, ModelService, RowTypeService, MainRouter) {
             var moduleName = 'Demo.MainModule';
 
-            ng.module(moduleName, ['ui.router', 'ngResource', 'ui.scroll.jqlite', 'ui.scroll'])
+            ng.module(moduleName, ['ui.router', 'ngResource', 'vs-repeat'])
                 .controller('MainCtrl', MainCtrl)
-                .provider('RowType', RowTypeProvider)
                 .factory('ModelService', ModelService)
-
-                // the RowTypeProvider can be configured as follows
-                // .config(['RowTypeProvider', function(rowTypeProvider){
-                //     rowTypeProvider.setItemsBeforeAd(30);
-                //     // rowTypeProvider.setEmptyRowsPerAd(12);
-                // }])
-
-                .config(MainRouter);
+                .factory('RowTypeService', RowTypeService)
+                .config(MainRouter)
+                .constant('AppConfig', {
+                    elements_per_page: 50,
+                    elements_before_ad: 20
+                });
 
             return moduleName;
         }

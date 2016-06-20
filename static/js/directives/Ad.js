@@ -6,7 +6,7 @@
                 return {
                     restrict: 'E',
                     replace: true,
-                    template: '<img ng-if="id !== null" class="ad" src="/ad/?r={{ id }}" style="{{ style }}" />',
+                    template: '<img ng-if="id !== null" class="ad" src="/ad/?r={{ id }}" />',
                     link: function (scope, element, attr) {
                         attr.$observe('location', function(value){
                             if(value) {
@@ -15,7 +15,6 @@
                         });
 
                         scope.id = null;
-                        scope.style = attr.useStyle;
                     }
                 }
             };

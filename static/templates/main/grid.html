@@ -5,18 +5,19 @@
         <div class="col-md-3">Price</div>
     </div>
 </div>
-<div class="container-fluid" style="height: 700px;" ui-scroll-viewport>
-    <div ui-scroll="row in ctrl.rows" buffer-size="20">
-        <div class="row" ng-if="row.type == 'element'">
-            <div class="col-md-5">Getting element {{ row.element }}</div>
-            <div class="col-md-4">{{ $index }}</div>
-            <div class="col-md-3">Yay!</div>
+<div vs-repeat style="height: 700px; overflow: auto;" vs-size="item.size" vs-scrolled-to-end="ctrl.showNextPage()">
+    <div ng-repeat="item in ctrl.elements.current" style="height: {{item.size}}px" class="row">
+        <div ng-if="item.type == 'ad'" class="col-md-12 text-center">
+            <ad location="{{item.location}}"></ad>
         </div>
-        <div class="row" ng-if="row.type == 'empty'">
-            <div class="col-md-12">&nbsp;</div>
+        <div ng-if="item.type == 'element'" class="col-md-5" style="font-size: {{ item.element.size }}px">
+            {{ item.element.face }}
         </div>
-        <div class="row" ng-if="row.type == 'ad'">
-            <div class="col-md-12" style="height: 20px; overflow: visible"><ad location="{{$index}}" use-style="position: absolute; bottom: 0"></ad></div>
+        <div ng-if="item.type == 'element'" class="col-md-4">
+            {{ item.element.date }}
+        </div>
+        <div ng-if="item.type == 'element'" class="col-md-3">
+            {{ item.element.price }}
         </div>
     </div>
 </div>
