@@ -6,7 +6,7 @@
                 return {
                     restrict: 'E',
                     replace: true,
-                    template: '<img ng-if="id !== null" class="ad" src="/ad/?r={{ id }}" />',
+                    template: '<img ng-if="id !== null" class="ad" src="/ad/?r={{ id }}" height="200" />',
                     link: function (scope, element, attr) {
                         attr.$observe('location', function(value){
                             if(value) {
