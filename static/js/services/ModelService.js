@@ -10,7 +10,7 @@
                             _.forEach(_.split(data, '\n'), function(line){
                                 if(line) {
                                     var obj = JSON.parse(line);
-                                    obj.date = moment(obj.date).toDate();
+                                    obj.date = moment(new Date(obj.date)).toDate();
                                     result.push(obj);
                                 }
                             });

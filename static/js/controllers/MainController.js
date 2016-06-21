@@ -31,7 +31,6 @@
                 };
 
                 _this.showNextPage = function(){
-                    console.log('here');
                     if(_this.elements.next.length == 0 && !_this.finished)
                         // the API is taking some time... just retry in half a second
                         $timeout(_this.showNextPage, 500);
