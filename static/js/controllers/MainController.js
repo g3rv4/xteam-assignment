@@ -14,18 +14,23 @@
 
                 _this.loadNextPage = function(callback){
                     var data = Ascii.query({
-                        page: _this.next_page,
+                        skip: _this.next_page * AppConfig.elements_per_page,
                         limit: AppConfig.elements_per_page
                     }, function(){
                         _this.elements.next = data;
                         _this.next_page++;
+                        if(data.length < AppConfig.elements_per_page) {
+                            _this.elements.next.unshift({ type: 'final', size: 40 });
+                            _this.finished = true;
+                        }
                         if(callback)
                             callback(data);
                     });
                 };
 
                 _this.showNextPage = function(){
-                    if(_this.elements.next.length == 0)
+                    if(_this.elements.next.length == 0 && !_this.finished)
+                        // the API is taking some time... just retry in half a second
                         $timeout(_this.showNextPage, 500);
                     else {
                         var base_position = _this.elements.current.length;
@@ -35,14 +40,18 @@
                             if (row.type == 'element') {
                                 row.element = _this.elements.next.pop();
                                 row.size = row.element.size + 20;
-                                row.show_relative = moment().diff(moment(row.element.date), 'days') < 7;
+                                if(row.element.date)
+                                    row.show_relative = moment().diff(moment(row.element.date), 'days') < 7;
+                                else
+                                    row.type = 'final';
                             } else {
                                 row.size = 200;
                             }
                             row.position = base_position + i++;
                             _this.elements.current.push(row);
                         }
-                        _this.loadNextPage();
+                        if(!_this.finished)
+                            _this.loadNextPage();
                     }
                 };
 

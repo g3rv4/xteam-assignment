@@ -6,10 +6,16 @@
         <div class="col-md-3">Price</div>
     </div>
 </div>
+<div ng-show="ctrl.elements.current.length == 0">
+    Loading...
+</div>
 <div vs-repeat style="height: 700px; overflow: auto;" vs-size="item.size" vs-scrolled-to-end="ctrl.showNextPage()">
     <div ng-repeat="item in ctrl.elements.current" style="height: {{item.size}}px" class="row">
         <div ng-if="item.type == 'ad'" class="col-md-12 text-center">
             <ad location="{{item.location}}"></ad>
+        </div>
+        <div ng-if="item.type == 'final'" class="col-md-12 text-center">
+            ~ end of catalogue ~
         </div>
         <div ng-if="item.type == 'element'" class="col-md-1">
             {{ item.position }}
